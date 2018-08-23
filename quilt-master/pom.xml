@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.interledger</groupId>
+  <artifactId>quilt-parent</artifactId>
+  <packaging>pom</packaging>
+  <version>0.13.0-SNAPSHOT</version>
+
+  <name>Hyperledger Quilt Parent</name>
+  <description>Parent project for Hyperledger Quilt modules.</description>
+  <url>https://github.com/hyperledger/quilt</url>
+  <inceptionYear>2017</inceptionYear>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <organization>
+    <name>Hyperledger and its contributors</name>
+  </organization>
+
+  <!-- Signing profile for signed distributions -->
+  <profiles>
+    <profile>
+      <id>sign</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.5</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+  <developers>
+    <developer>
+      <name>Adrian Hope-Bailie</name>
+      <organizationUrl>https://github.com/adrianhopebailie</organizationUrl>
+    </developer>
+    <developer>
+      <name>Andrew Gates</name>
+      <organizationUrl>https://github.com/andrew-g-za</organizationUrl>
+    </developer>
+    <developer>
+      <name>Enrique Benito</name>
+      <organizationUrl>https://github.com/earizon</organizationUrl>
+    </developer>
+    <developer>
+      <name>David Fuelling</name>
+      <organizationUrl>https://github.com/sappenin</organizationUrl>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git://github.com/hyperledger/quilt.git</connection>
+    <developerConnection>scm:git:git@github.com:hyperledger/quilt.git</developerConnection>
+  </scm>
+
+  <properties>
+
+    <!-- org.apache.maven.plugins:maven-compiler-plugin -->
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.resources.sourceEncoding>UTF-8</project.resources.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <!-- org.jacoco:jacoc-maven-plugin -->
+    <jacoco.propertyName>argLine</jacoco.propertyName>
+
+    <!-- org.apache.maven.plugins:maven-checkstyle-plugin -->
+    <checkstyle.config.location>org/interledger/dev-ops/checkstyle.xml</checkstyle.config.location>
+    <checkstyle.output.file>
+      ${project.build.directory}/checkstyle-reports/checkstyle-result.xml
+    </checkstyle.output.file>
+    <checkstyle.violationSeverity>warning</checkstyle.violationSeverity>
+  </properties>
+
+  <modules>
+    <module>dev-ops</module>
+    <module>codec-framework</module>
+    <module>ilp-annotations</module>
+    <module>ilp-core</module>
+    <module>ilp-core-codecs</module>
+    <module>btp-core</module>
+    <module>btp-core-codecs</module>
+    <module>ildcp-core</module>
+    <module>ildcp-core-codecs</module>
+    <module>jackson-datatypes</module>
+    <!-- TODO Add new modules with PSK and IPR code
+        <module>core-transport-psk</module>
+        <module>core-transport-ipr</module>
+    -->
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>ilp-annotations</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>codec-framework</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>ilp-core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>ilp-core-codecs</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>btp-core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>btp-core-codecs</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>ildcp-core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>ildcp-core-codecs</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>javax.money</groupId>
+        <artifactId>money-api</artifactId>
+        <version>1.0.3</version>
+      </dependency>
+
+      <dependency>
+        <groupId>net.i2p.crypto</groupId>
+        <artifactId>eddsa</artifactId>
+        <version>0.3.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.immutables</groupId>
+        <artifactId>value</artifactId>
+        <version>2.6.3</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>2.9.5</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>25.0-jre</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcprov-jdk16</artifactId>
+        <version>1.46</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-all</artifactId>
+        <version>1.3</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>2.18.3</version>
+        <scope>test</scope>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+
+    <!-- All plugin versions and default config is defined
+          in the pluginManagement section.
+     -->
+
+    <pluginManagement>
+      <plugins>
+
+        <!-- org.codehaus.mojo:maven-compiler-plugin -->
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>2.5</version>
+        </plugin>
+
+        <!-- org.apache.maven.plugins:maven-compiler-plugin -->
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.6.2</version>
+          <configuration>
+            <source>${maven.compiler.source}</source>
+            <target>${maven.compiler.target}</target>
+          </configuration>
+        </plugin>
+
+        <!-- org.apache.maven.plugins:maven-source-plugin -->
+        <plugin>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>2.2.1</version>
+          <executions>
+            <execution>
+              <id>attach-sources</id>
+              <goals>
+                <goal>jar-no-fork</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!-- org.apache.maven.plugins:maven-javadoc-plugin -->
+        <plugin>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>2.10.4</version>
+          <executions>
+            <execution>
+              <id>attach-javadocs</id>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!-- org.apache.maven.plugins:maven-checkstyle-plugin -->
+        <plugin>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <!-- Lock down plugin version for build reproducibility -->
+          <version>2.17</version>
+          <inherited>true</inherited>
+          <dependencies>
+            <!-- Update Checkstyle version used -->
+            <dependency>
+              <groupId>com.puppycrawl.tools</groupId>
+              <artifactId>checkstyle</artifactId>
+              <version>8.4</version>
+            </dependency>
+            <!-- Multimodal config -->
+            <dependency>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>dev-ops</artifactId>
+              <version>${project.version}</version>
+            </dependency>
+          </dependencies>
+          <executions>
+            <execution>
+              <phase>process-sources</phase>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!-- org.jacoco:jacoc-maven-plugin -->
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <version>0.7.9</version>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <executions>
+            <execution>
+              <goals>
+                <goal>prepare-agent</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>report</id>
+              <phase>test</phase>
+              <goals>
+                <goal>report</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!-- org.apache.maven.plugins:maven-surefire-plugin -->
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.20</version>
+          <configuration>
+            <argLine>@{argLine}</argLine>
+          </configuration>
+        </plugin>
+
+        <!-- org.sonatype.plugins:nexus-staging-maven-plugin -->
+        <plugin>
+          <groupId>org.sonatype.plugins</groupId>
+          <artifactId>nexus-staging-maven-plugin</artifactId>
+          <version>1.6.8</version>
+          <extensions>true</extensions>
+          <configuration>
+            <id>ossrh-snapshots-interledger</id>
+            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+          </configuration>
+        </plugin>
+
+        <!-- org.codehaus.mojo:license-maven-plugin -->
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>license-maven-plugin</artifactId>
+          <version>1.16</version>
+          <configuration>
+            <!--license to use for the project-->
+            <licenseName>apache_v2</licenseName>
+            <processStartTag>========================LICENSE_START=================================
+            </processStartTag>
+            <processEndTag>=========================LICENSE_END==================================
+            </processEndTag>
+
+            <!--generate license file even if it exists-->
+            <force>true</force>
+
+            <licenseMerges>
+              <licenseMerge>Apache License, Version 2.0|The Apache Software License, Version 2.0|Apache
+                2|Apache License 2.0|AL 2.0
+              </licenseMerge>
+            </licenseMerges>
+
+            <!--exclude test-scoped dependencies from the 3rd party license-list-->
+            <excludedScopes>test</excludedScopes>
+
+            <excludes>
+              <exclude>**/*.json</exclude>
+            </excludes>
+
+          </configuration>
+          <executions>
+            <execution>
+              <id>license-management</id>
+              <goals>
+                <!--updates the source's headers according to the specified license-->
+                <goal>update-file-header</goal>
+
+                <!--Adds the full-blown license file to the final product-->
+                <goal>update-project-license</goal>
+
+                <!--generate and add a list of third-party licenses-->
+                <goal>add-third-party</goal>
+              </goals>
+              <phase>process-sources</phase>
+            </execution>
+          </executions>
+        </plugin>
+
+      </plugins>
+    </pluginManagement>
+
+
+    <!-- All plugins in the plugins section will be run for all sub-modules
+      unless <inherited>false</inherited> is specified. -->
+
+    <plugins>
+
+      <!-- org.apache.maven.plugins:maven-compiler-plugin -->
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+
+      <!-- org.apache.maven.plugins:maven-source-plugin -->
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+      </plugin>
+
+      <!-- org.apache.maven.plugins:maven-javadoc-plugin -->
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin>
+
+      <!-- org.apache.maven.plugins:maven-checkstyle-plugin -->
+      <plugin>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+      </plugin>
+
+      <!-- org.jacoco:jacoco-maven-plugin -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+      </plugin>
+
+      <!-- org.apache.maven.plugins:maven-surefire-plugin -->
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
+
+      <!-- org.sonatype.plugins:nexus-staging-maven-plugin -->
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+      </plugin>
+
+    </plugins>
+
+  </build>
+
+  <reporting>
+    <plugins>
+
+      <!-- org.jacoco:jacoc-maven-plugin -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <inherited>false</inherited>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+
+      <!-- org.apache.maven.plugins:maven-checkstyle-plugin -->
+      <plugin>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>checkstyle</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+
+      <!-- org.apache.maven.plugins:maven-javadoc-plugin -->
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin>
+
+    </plugins>
+  </reporting>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh-snapshots-interledger</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+</project>
